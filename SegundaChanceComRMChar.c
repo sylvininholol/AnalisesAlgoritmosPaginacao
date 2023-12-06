@@ -36,6 +36,11 @@ int encontrar_vitima(Pagina quadros[], int max_quadros, int* ponteiro) {
             quadros[*ponteiro].bits_referencia = 0;
         }
 
+        // Mudança: Verificar o bit_modificado antes de atualizar o ponteiro
+        if (quadros[*ponteiro].bit_modificado == 0) {
+            return *ponteiro;
+        }
+
         *ponteiro = (*ponteiro + 1) % max_quadros;
 
         // Adicionado para evitar loop infinito
@@ -47,6 +52,7 @@ int encontrar_vitima(Pagina quadros[], int max_quadros, int* ponteiro) {
     // Retorna a posição original do ponteiro
     return inicio_ponteiro;
 }
+
 
 int algoritmo_segunda_chance(char referenciadas[][20], int tamanho_referenciadas, int max_quadros) {
     Pagina quadros[max_quadros];
@@ -80,7 +86,7 @@ int algoritmo_segunda_chance(char referenciadas[][20], int tamanho_referenciadas
 
             // Simulação da marcação de páginas modificadas
             if (quadros[vitima].bit_modificado == 0) {
-                printf("Página %s foi modificada.\n", quadros[vitima].pagina_string);
+                printf("Pagina %s foi modificada.\n", quadros[vitima].pagina_string);
                 quadros[vitima].bit_modificado = 1;
             }
 
@@ -94,7 +100,9 @@ int algoritmo_segunda_chance(char referenciadas[][20], int tamanho_referenciadas
 int main() {
     clock_t inicio, fim;
     double tempoDecorrido;
-    char referenciadas[][20] = {"jp", "sylvino", "mota", "breno", "jorge", "sylvino", "sylvino", "jp", "sylvino", "jorge", "mota", "sylvino", "mota", "sylvino"};
+   // char referenciadas[][20] = {"chefe", "cozinheiro", "cliente", "consumidor", "produtor", "chefe", "cozinheiro", "cliente", "consumidor", "produtor", "chefe", "cozinheiro", "cliente", "consumidor", "produtor", "chefe", "cozinheiro", "cliente", "consumidor", "produtor"};
+   // char referenciadas[][20] = {"jp", "sylvino", "mota", "breno", "jorge", "sylvino", "sylvino", "jp", "sylvino", "jorge", "mota", "sylvino", "mota", "sylvino"};
+    char referenciadas[][20] = {"ladrao", "policial", "detetive", "carpinteiro", "bombeiro", "ladrao", "policial", "detetive", "carpinteiro", "bombeiro", "ladrao", "policial", "detetive", "carpinteiro", "bombeiro", "ladrao", "policial", "detetive", "carpinteiro", "bombeiro"};
     int tamanho_referenciadas = sizeof(referenciadas) / sizeof(referenciadas[0]);
     int max_quadros = 3;
 
@@ -103,7 +111,7 @@ int main() {
     fim = clock();
     tempoDecorrido = ((double)(fim - inicio) / CLOCKS_PER_SEC);
 
-    printf("Número total de faltas de página: %d\n", faltas);
+    printf("Numero total de faltas de pagina: %d\n", faltas);
     printf("Tempo decorrido: %f segundos\n", tempoDecorrido);
 
     return 0;

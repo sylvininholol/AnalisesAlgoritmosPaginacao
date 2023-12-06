@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 #define CAPACIDADE_MEMORIA 3
 
@@ -96,15 +97,19 @@ void addpagina(char *memoria[], char *pagina)
 }
 
 int main() {
-    char *paginas[] = {"jp", "sylvino", "mota", "breno", "jorge", "sylvino", "sylvino", "jp", "sylvino", "jorge", "mota", "sylvino", "mota", "sylvino"};
+    char *paginas[] = {"ladrao", "policial", "detetive", "carpinteiro", "bombeiro", "ladrao", "policial", "detetive", "carpinteiro", "bombeiro", "ladrao", "policial", "detetive", "carpinteiro", "bombeiro", "ladrao", "policial", "detetive", "carpinteiro", "bombeiro"};
+    //char *paginas[] = {"chefe", "cozinheiro", "cliente", "consumidor", "produtor", "chefe", "cozinheiro", "cliente", "consumidor", "produtor", "chefe", "cozinheiro", "cliente", "consumidor", "produtor", "chefe", "cozinheiro", "cliente", "consumidor", "produtor"};
+   // char *paginas[] = {"jp", "sylvino", "mota", "breno", "jorge", "sylvino", "sylvino", "jp", "sylvino", "jorge", "mota", "sylvino", "mota", "sylvino"};
     int numPaginas = sizeof(paginas) / sizeof(paginas[0]);
+    clock_t inicio, fim;
+    double tempoDecorrido;
 
     char *memoria[CAPACIDADE_MEMORIA];
     inicializarMemoria(memoria);
 
     for (int i = 0; i < numPaginas; i++) {
         printf("Acessando Pagina: %s\n", paginas[i]);
-
+        inicio = clock();
         if (!paginaNaMemoria(memoria, paginas[i])) {
             if(i<3)
             {
@@ -114,6 +119,8 @@ int main() {
             substituirPagina(memoria, paginas[i], i, numPaginas, paginas);
             }
         }
+        fim = clock();
+        tempoDecorrido = ((double)(fim - inicio)/ CLOCKS_PER_SEC);
 
         imprimirMemoria(memoria);
         printf("\n");
@@ -124,6 +131,7 @@ int main() {
         free(memoria[i]);
     }
 
-    printf("page fault: %d", pagefault);
+    printf("page fault: %d\n", pagefault);
+    printf("Tempo decorrido: %f segundos\n", tempoDecorrido);
     return 0;
 }

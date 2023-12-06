@@ -64,7 +64,9 @@ int algoritmo_relogio_envelhecido(char referenciadas[][20], int tamanho_referenc
 int main() {
     clock_t inicio, fim;
     double tempoDecorrido;
-    char referenciadas[][20] = {"jp", "sylvino", "mota", "breno", "jorge", "sylvino", "sylvino", "jp", "sylvino", "jorge", "mota", "sylvino", "mota", "sylvino"};
+  //  char referenciadas[][20] = {"chefe", "cozinheiro", "cliente", "consumidor", "produtor", "chefe", "cozinheiro", "cliente", "consumidor", "produtor", "chefe", "cozinheiro", "cliente", "consumidor", "produtor", "chefe", "cozinheiro", "cliente", "consumidor", "produtor"};
+   //char referenciadas[][20] = {"jp", "sylvino", "mota", "breno", "jorge", "sylvino", "sylvino", "jp", "sylvino", "jorge", "mota", "sylvino", "mota", "sylvino"};
+    char referenciadas[][20] = {"ladrao", "policial", "detetive", "carpinteiro", "bombeiro", "ladrao", "policial", "detetive", "carpinteiro", "bombeiro", "ladrao", "policial", "detetive", "carpinteiro", "bombeiro", "ladrao", "policial", "detetive", "carpinteiro", "bombeiro"};
     int tamanho_referenciadas = sizeof(referenciadas) / sizeof(referenciadas[0]);
     int max_quadros = 3;
 
@@ -73,7 +75,7 @@ int main() {
     fim = clock();
 
     tempoDecorrido = ((double)(fim-inicio)/CLOCKS_PER_SEC);
-    printf("Número total de faltas de página: %d\n", faltas);
+    printf("Numero total de faltas de pagina: %d\n", faltas);
     printf("Tempo decorrido: %f segundos\n", tempoDecorrido);
 
     return 0;
